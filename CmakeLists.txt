@@ -9,4 +9,5 @@ include_directories(include)
 add_executable(search_engine
 	apps/main.cpp
 	src/FileReader.cpp
+	src/SearchEngine.cpp
 )
