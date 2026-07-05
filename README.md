@@ -10,7 +10,7 @@ A beginner C++ search engine project built using:
 
 - Read text from file
 - Splits the text into lower case words using a tokenizer
-- runs the seach on tokenized words
+- Indexing the documents using InvertedIndex to reduce the lookup time
 - Modular project structure
 
 ## Build Instructions
