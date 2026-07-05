@@ -6,30 +6,39 @@
 
 int main(int argc, char* argv[]) {
 
-	if (argc < 2) {
-		std::cout << "Usage: search_engine <word>\n";
-		return 1;
-	}
 
-	std::string searchWord = argv[1];
 
 	FileReader reader;
 
 	std::string text = reader.readFile("data/data.txt");
 
+	if (text.empty())
+	{
+		std::cout << "File is empty or not found\n";
+		return 0;
+	}
+
 	SearchEngine engine;
 
-	bool found = engine.containsWord(
-		text, 
-		searchWord
-	);
+	engine.addDocument(1, text);
 
-	if (found) {
-		std::cout << "Word found" << "\n";
+	std::string query;
+	std::cout << "Enter search query: ";
+	std::getline(std::cin, query);
+
+	auto result = engine.search(query);
+
+	if (result.empty()) {
+		std::cout << "word not in doc";
 	}
 	else
 	{
-		std::cout << "Word not found" << "\n";
+		std::cout << "Found in documents: ";
+		for (int id : result)
+		{
+			std::cout << id << " ";
+		}
+		std::cout << std::endl;
 	}
 
 	return 0;

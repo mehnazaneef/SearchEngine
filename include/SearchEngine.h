@@ -1,15 +1,13 @@
 #pragma once
 
-#include <string>
-#include "Tokenizer.h"
+#include "InvertedIndex.h"
 
 class SearchEngine
 {
 public:
-	bool containsWord(
-		const std::string& text,
-		const std::string& word);
+	void addDocument(int id, const std::string& text);
+	std::vector<int> search(const std::string& query);
 
 private:
-	Tokenizer tokenizer;
+	InvertedIndex index;
 };

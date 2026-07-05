@@ -1,15 +1,9 @@
 #include "SearchEngine.h"
 
-bool SearchEngine::containsWord(
-	const std::string& text,
-	const std::string& word
-)
-{
-	auto tokens = tokenizer.tokenize(text);
+void SearchEngine::addDocument(int id, const std::string& text) {
+	index.addDocument(id, text);
+}
 
-	for (const auto& token : tokens) {
-		if (token == word)
-			return true;
-	}
-	return false;
+std::vector<int> SearchEngine::search(const std::string& query) {
+	return index.search(query);
 }
