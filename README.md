@@ -9,7 +9,8 @@ A beginner C++ search engine project built using:
 ## Features
 
 - Read text from file
-- Search for words
+- Splits the text into lower case words using a tokenizer
+- runs the seach on tokenized words
 - Modular project structure
 
 ## Build Instructions
