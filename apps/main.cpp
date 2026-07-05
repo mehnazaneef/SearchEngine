@@ -14,7 +14,10 @@ int main(int argc, char* argv[]) {
 
 	FileReader reader;
 
-	std::string text = reader.readFile("data.txt");
+	std::string text = reader.readFile("data/data.txt");
+
+	std::cout << "Text read:\n";
+	std::cout << text << "\n";
 
 	SearchEngine engine;
 

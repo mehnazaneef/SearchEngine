@@ -11,3 +11,9 @@ add_executable(search_engine
 	src/FileReader.cpp
 	src/SearchEngine.cpp
 )
+
+file(COPY
+    ${CMAKE_SOURCE_DIR}/data
+    DESTINATION
+    ${CMAKE_BINARY_DIR}
+)
