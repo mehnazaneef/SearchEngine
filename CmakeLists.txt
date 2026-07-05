@@ -10,7 +10,7 @@ add_executable(search_engine
 	apps/main.cpp
 	src/FileReader.cpp
 	src/SearchEngine.cpp
-)
+	src/Tokenizer.cpp)
 
 file(COPY
     ${CMAKE_SOURCE_DIR}/data

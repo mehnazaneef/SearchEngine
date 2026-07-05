@@ -5,5 +5,11 @@ bool SearchEngine::containsWord(
 	const std::string& word
 )
 {
-	return text.find(word) != std::string::npos;
+	auto tokens = tokenizer.tokenize(text);
+
+	for (const auto& token : tokens) {
+		if (token == word)
+			return true;
+	}
+	return false;
 }
