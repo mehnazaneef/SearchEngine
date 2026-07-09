@@ -1,23 +1,37 @@
-# SearchEngine
+# Search Engine
 
-A beginner C++ search engine project built using:
+A simple C++ search engine implementation built from scratch to understand information retrieval concepts and modern C++ design.
 
-- C++20
-- CMake
-- Git
+## Features Implemented
 
-## Features
+- C++20 based implementation
+- Multi-file text loading
+- Directory traversal using std::filesystem
+- Text tokenization
+- Inverted index based searching
+- Multi-word AND search
+- Document metadata management
+- Automatic data folder deployment using CMake
 
-- Read text from file
-- Splits the text into lower case words using a tokenizer
-- Indexing the documents using InvertedIndex to reduce the lookup time
-- Modular project structure
+## Current Workflow
+
+1. Scan data directory for text files.
+2. Read file contents.
+3. Tokenize the content.
+4. Build inverted index.
+5. Execute queries.
+6. Return matching document names.
 
 ## Build Instructions
 
-```bash
-mkdir build
-cd build
+### Requirements
 
-cmake ..
-cmake --build .
+- C++20 compiler
+- CMake 3.20+
+- Visual Studio 2022
+
+### Build
+
+```bash
+cmake -S . -B build
+cmake --build build

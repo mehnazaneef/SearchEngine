@@ -1,21 +1,13 @@
 #include "InvertedIndex.h"
 #include "Tokenizer.h"
 
-void InvertedIndex::addDocument(int docId, const std::string& text) {
-	Tokenizer tokenizer;
-	auto tokens = tokenizer.tokenize(text);
-
+void InvertedIndex::addDocument(int docId, const std::vector<std::string> tokens) {
 	for (const auto& token : tokens) {
 		index[token].insert(docId);
 	}
 }
 
-std::vector<int> InvertedIndex::search(const std::string& query) {
-	Tokenizer tokenizer;
-	auto words = tokenizer.tokenize(query);
-
-	if (words.empty())
-		return {};
+std::vector<int> InvertedIndex::search(const std::vector<std::string> words) {
 
 	std::unordered_set<int> result = index[words[0]];
 

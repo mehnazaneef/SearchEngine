@@ -6,21 +6,15 @@
 
 int main(int argc, char* argv[]) {
 
-
-
 	FileReader reader;
-
-	std::string text = reader.readFile("data/data.txt");
-
-	if (text.empty())
-	{
-		std::cout << "File is empty or not found\n";
-		return 0;
-	}
-
 	SearchEngine engine;
 
-	engine.addDocument(1, text);
+	auto files = reader.getFiles("data");
+
+	for (const auto& file : files) {
+		auto text = reader.readFile(file);
+		engine.addDocument(file, text);
+	}
 
 	std::string query;
 	std::cout << "Enter search query: ";
@@ -34,9 +28,9 @@ int main(int argc, char* argv[]) {
 	else
 	{
 		std::cout << "Found in documents: ";
-		for (int id : result)
+		for (const std::string& filename : result)
 		{
-			std::cout << id << " ";
+			std::cout << filename << " ";
 		}
 		std::cout << std::endl;
 	}

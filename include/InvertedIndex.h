@@ -7,9 +7,9 @@
 
 class InvertedIndex {
 public:
-	void addDocument(int docId, const std::string& text);
+	void addDocument(int docId, const std::vector<std::string> tokens);
 
-	std::vector<int> search(const std::string& query);
+	std::vector<int> search(const std::vector<std::string> words);
 
 private:
 	std::unordered_map<std::string, std::unordered_set<int>> index;

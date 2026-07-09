@@ -10,7 +10,8 @@ add_executable(search_engine
 	apps/main.cpp
 	src/FileReader.cpp
 	src/SearchEngine.cpp
-	src/Tokenizer.cpp "include/InvertedIndex.h" "src/InvertedIndex.cpp")
+	src/Tokenizer.cpp 
+	src/InvertedIndex.cpp)
 
 file(COPY
     ${CMAKE_SOURCE_DIR}/data

@@ -1,13 +1,18 @@
 #pragma once
 
 #include "InvertedIndex.h"
+#include "Tokenizer.h"
+#include "Document.h"
 
 class SearchEngine
 {
 public:
-	void addDocument(int id, const std::string& text);
-	std::vector<int> search(const std::string& query);
+	void addDocument(const std::filesystem::path &path, const std::string& text);
+	std::vector<std::string> search(const std::string& query);
 
 private:
-	InvertedIndex index;
+	InvertedIndex m_index;
+	Tokenizer m_tokenizer;
+	std::unordered_map<int, Document> m_documents;
+	int m_nextDocumentId = 1;
 };
