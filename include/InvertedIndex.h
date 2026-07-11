@@ -5,12 +5,15 @@
 #include <unordered_set>
 #include <vector>
 
+using PostingList = std::unordered_map<int, int>;
+using Index = std::unordered_map<std::string, PostingList>;
+
 class InvertedIndex {
 public:
 	void addDocument(int docId, const std::vector<std::string> tokens);
 
-	std::vector<int> search(const std::vector<std::string> words);
+	const PostingList* getPostingList(const std::string& token) const;
 
 private:
-	std::unordered_map<std::string, std::unordered_set<int>> index;
+	Index m_index;
 };

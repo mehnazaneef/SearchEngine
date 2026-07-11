@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
 	auto result = engine.search(query);
 
 	if (result.empty()) {
-		std::cout << "word not in doc";
+		std::cout << "word not found";
 	}
 	else
 	{

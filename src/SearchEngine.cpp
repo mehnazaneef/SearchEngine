@@ -19,18 +19,43 @@ std::vector<std::string> SearchEngine::search(const std::string& query) {
 	if (words.empty())
 		return {};
 
-	std::vector<std::string> temp;
+	const PostingList* firstPostingList = m_index.getPostingList(words[0]);
 
-	auto resultIds = m_index.search(words);
+	if (firstPostingList == nullptr)
+		return {};
 
-	for (const auto& id : resultIds) {
-		auto it = m_documents.find(id);
+	PostingList currentList = *firstPostingList;
+
+	for (size_t i = 1;i < words.size();i++) {
+		const PostingList* postingList = m_index.getPostingList(words[i]);
+
+		if (postingList == nullptr)
+			return {};
+
+		PostingList tempResult;
+
+		for (const auto& [docId, score] : currentList) {
+			auto it = postingList->find(docId);
+			
+			if (it != postingList->end()) {
+				tempResult[docId] = score + it->second;
+			}
+		}
+		currentList = std::move(tempResult);
+	}
+	// Convert document IDs into filenames.
+	std::vector<std::string> results;
+
+	for (const auto& [docId, score] : currentList)
+	{
+		auto it = m_documents.find(docId);
 
 		if (it != m_documents.end())
 		{
-			temp.push_back(it->second.path.filename().string());
+			results.push_back(it->second.path.filename().string());
 		}
 	}
 
-	return temp;
+	return results;
+
 }

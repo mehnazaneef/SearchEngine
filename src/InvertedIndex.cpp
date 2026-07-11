@@ -3,25 +3,15 @@
 
 void InvertedIndex::addDocument(int docId, const std::vector<std::string> tokens) {
 	for (const auto& token : tokens) {
-		index[token].insert(docId);
+		m_index[token][docId]++;
 	}
 }
 
-std::vector<int> InvertedIndex::search(const std::vector<std::string> words) {
+const PostingList* InvertedIndex::getPostingList(const std::string& token) const{
+	auto it = m_index.find(token);
 
-	std::unordered_set<int> result = index[words[0]];
+	if (it == m_index.end())
+		return nullptr;
 
-	for (size_t i = 1; i < words.size(); i++) {
-
-		const auto& currentSet = index[words[i]];
-		std::unordered_set<int> temp;
-
-		for (int docId : result) {
-			if (currentSet.find(docId) != currentSet.end()) {
-				temp.insert(docId);
-			}
-		}
-		result = std::move(temp);
-	}
-	return std::vector<int>(result.begin(), result.end());
+	return &it->second;
 }
