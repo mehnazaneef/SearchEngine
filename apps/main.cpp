@@ -20,19 +20,14 @@ int main(int argc, char* argv[]) {
 	std::cout << "Enter search query: ";
 	std::getline(std::cin, query);
 
-	auto result = engine.search(query);
+	auto results = engine.search(query);
 
-	if (result.empty()) {
-		std::cout << "word not found";
-	}
-	else
+	for (const auto& result : results)
 	{
-		std::cout << "Found in documents: ";
-		for (const std::string& filename : result)
-		{
-			std::cout << filename << " ";
-		}
-		std::cout << std::endl;
+		std::cout << result.getPath().filename().string()
+			<< "  Score: "
+			<< result.getScore()
+			<< '\n';
 	}
 
 	return 0;

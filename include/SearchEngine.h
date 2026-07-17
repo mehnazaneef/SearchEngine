@@ -3,12 +3,13 @@
 #include "InvertedIndex.h"
 #include "Tokenizer.h"
 #include "Document.h"
+#include "SearchResult.h"
 
 class SearchEngine
 {
 public:
 	void addDocument(const std::filesystem::path &path, const std::string& text);
-	std::vector<std::string> search(const std::string& query);
+	std::vector<SearchResult> search(const std::string& query);
 
 private:
 	InvertedIndex m_index;

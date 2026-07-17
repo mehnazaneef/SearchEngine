@@ -12,7 +12,7 @@ void SearchEngine::addDocument(const std::filesystem::path& path, const std::str
 	m_index.addDocument(id, tokens);
 }
 
-std::vector<std::string> SearchEngine::search(const std::string& query) {
+std::vector<SearchResult> SearchEngine::search(const std::string& query) {
 
 	auto words = m_tokenizer.tokenize(query);
 
@@ -43,18 +43,30 @@ std::vector<std::string> SearchEngine::search(const std::string& query) {
 		}
 		currentList = std::move(tempResult);
 	}
-	// Convert document IDs into filenames.
-	std::vector<std::string> results;
+	// Build search results.
+	std::vector<SearchResult> results;
 
 	for (const auto& [docId, score] : currentList)
 	{
 		auto it = m_documents.find(docId);
 
-		if (it != m_documents.end())
-		{
-			results.push_back(it->second.path.filename().string());
-		}
+		if (it == m_documents.end())
+			continue;
+
+		results.emplace_back(
+			it->second.id,
+			it->second.path,
+			score
+		);
 	}
+
+	// Sort results in descending order of score.
+	std::sort(results.begin(),
+		results.end(),
+		[](const SearchResult& lhs, const SearchResult& rhs)
+		{
+			return lhs.getScore() > rhs.getScore();
+		});
 
 	return results;
 
