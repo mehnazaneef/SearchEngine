@@ -11,7 +11,7 @@ add_executable(search_engine
 	src/FileReader.cpp
 	src/SearchEngine.cpp
 	src/Tokenizer.cpp 
-	src/InvertedIndex.cpp "include/SearchResult.h" "src/SearchResult.cpp" "include/SearchOperator.h" "include/ParsedQuery.h" "include/QueryTerm.h")
+	src/InvertedIndex.cpp "include/SearchResult.h" "src/SearchResult.cpp" "include/SearchOperator.h" "include/ParsedQuery.h" "include/QueryTerm.h" "include/QueryProcessor.h" "src/QueryProcessor.cpp")
 
 file(COPY
     ${CMAKE_SOURCE_DIR}/data
